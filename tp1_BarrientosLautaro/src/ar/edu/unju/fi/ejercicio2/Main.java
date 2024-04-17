@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.ejercico2;
+package ar.edu.unju.fi.ejercicio2;
 
 public class Main {
 
