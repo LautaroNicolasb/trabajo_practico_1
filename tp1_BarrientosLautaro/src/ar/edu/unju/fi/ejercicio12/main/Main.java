@@ -1,9 +1,6 @@
 package ar.edu.unju.fi.ejercicio12.main;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 
 import ar.edu.unju.fi.ejercicio12.model.Persona;
@@ -37,7 +34,6 @@ public class Main {
 		System.out.println("Estacion: "+persona.determinarEstacion());
 		
 		scanner.close();
-		
 		
 	    }
 
