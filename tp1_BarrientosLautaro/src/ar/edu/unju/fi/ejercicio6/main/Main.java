@@ -1,9 +1,9 @@
-package ar.edu.unju.fi.main;
+package ar.edu.unju.fi.ejercicio6.main;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import ar.edu.unju.fi.model.Persona;
+import ar.edu.unju.fi.ejercicio6.model.Persona;
 
 public class Main {
 

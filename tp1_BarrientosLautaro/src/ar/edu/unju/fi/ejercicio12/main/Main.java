@@ -20,7 +20,7 @@ public class Main {
 
 	        // Dividir la cadena en día, mes y año
 		String[] partesFecha = fechaStr.split("/");
-	    int dia = Integer.parseInt(partesFecha[0]);
+		int dia = Integer.parseInt(partesFecha[0]);
 	    int mes = Integer.parseInt(partesFecha[1]) - 1; // Restar 1 porque Calendar empieza en 0 para los meses
         int anio = Integer.parseInt(partesFecha[2]);
 
