@@ -1,8 +1,12 @@
 package ar.edu.unju.fi.ejercicio18.main;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Scanner;
 
+import ar.edu.unju.fi.ejercicio17.model.Jugador;
 import ar.edu.unju.fi.ejercicio18.model.DestinoTuristico;
 import ar.edu.unju.fi.ejercicio18.model.Pais;
 
@@ -125,6 +129,7 @@ public class Main {
 		}
 	}
 	
+	//busca el destino con el codigo
 	public static DestinoTuristico buscarDestinoPorCodigo(String codigoDestino) {
 		for(DestinoTuristico destino : destinos) {
 			if (destino.getCodigo().equals(codigoDestino)) {
@@ -133,7 +138,7 @@ public class Main {
 		}
 		return null;
 	}
-	
+	//busca el pais con el codigo
 	public static Pais buscarPaisPorCodigo(String codigoPais) {
 		for(Pais p : paises) {
 			if (p.getCodigo().equals(codigoPais)) {
@@ -141,5 +146,58 @@ public class Main {
 			}
 		}
 		return null;
+	}
+	
+	public static void limpiarListaDestino() {
+		try {
+	        destinos.clear();
+	        System.out.println("Lista de destinos turísticos limpiada correctamente.");
+	    } catch (NullPointerException e) {
+	        System.out.println("Error: La lista de destinos turísticos no ha sido inicializada.");
+	    } catch (Exception e) {
+	        System.out.println("Error inesperado: " + e.getMessage());
+	    }
+	}
+	
+	public static void eliminarDestino() {
+		try {
+	        System.out.println("Ingrese el código del destino turístico a eliminar:");
+	        String codigoDestino = scanner.nextLine();
+	        
+	        Iterator<DestinoTuristico> iterator = destinos.iterator();
+	        while (iterator.hasNext()) {
+	            DestinoTuristico destino = iterator.next();
+	            if (destino.getCodigo().equals(codigoDestino)) {
+	                iterator.remove();
+	                System.out.println("Destino turístico eliminado correctamente.");
+	                return; // Salir del método después de eliminar el destino
+	            }
+	        }
+	        System.out.println("No se encontró ningún destino turístico con el código especificado.");
+	    } catch (Exception e) {
+	        System.out.println("Error inesperado: " + e.getMessage());
+	    }
+	}
+	
+	public static void mostrarDestinoOrdenadoNombre() {
+		try {
+	        if (destinos.isEmpty()) {
+	            System.out.println("No hay destinos turísticos para mostrar.");
+	        }else {
+						System.out.println("---- Destinos turisticos ordenados por nomoobres ----");
+						destinos.sort(Comparator.comparing(DestinoTuristico::getNombre));
+						destinos.forEach(d->System.out.println(d));
+	        }
+	    } catch (NullPointerException e) {
+	        System.out.println("Error: La lista de destinos turísticos no ha sido inicializada.");
+	    } catch (Exception e) {
+	        System.out.println("Error inesperado: " + e.getMessage());
+	    }
+	}
+	
+	public static void mostrarPais() {
+				System.out.println("---- Lista Paises ----");
+						paises.forEach(p->System.out.println(p));
+	  
 	}
 }
