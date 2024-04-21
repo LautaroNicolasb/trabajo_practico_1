@@ -1,8 +1,8 @@
 package ar.edu.unju.fi.ejercicio18.main;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -70,28 +70,36 @@ public class Main {
 	}
 	
 	private static void altaDestino() {
-		System.out.println("----- Alta destino turístico -----");
-		System.out.println("Ingrese el código país: ");
-		String codigoPais = scanner.nextLine();
-		Pais pais = null;
-		
-		for (Pais p : paises) {
-			if (p.getCodigo().equals(codigoPais));
-				pais = p;
-			break;
-		}
-		if (pais != null) {
-			System.out.println("Codigo: ");
-			String codigoDestino = scanner.nextLine();
-			System.out.println("Nombre:");
-			String nombre = scanner.nextLine();
-			System.out.println("Precio: ");
-			double precio = scanner.nextDouble();
-			System.out.println("Cantidad de días: ");
-			int cantidadDias = scanner.nextInt();
-			scanner.nextLine();
-		    destinos.add(new DestinoTuristico(codigoDestino, nombre, precio, pais, cantidadDias));
-		}
+		try {
+			System.out.println("----- Alta destino turístico -----");
+			System.out.println("Ingrese el código país: ");
+			String codigoPais = scanner.nextLine();
+			Pais pais = null;
+			
+			for (Pais p : paises) {
+				if (p.getCodigo().equals(codigoPais));
+					pais = p;
+				break;
+			}
+			if (pais != null) {
+				System.out.println("Codigo: ");
+				String codigoDestino = scanner.nextLine();
+				System.out.println("Nombre:");
+				String nombre = scanner.nextLine();
+				System.out.println("Precio: ");
+				double precio = scanner.nextDouble();
+				System.out.println("Cantidad de días: ");
+				int cantidadDias = scanner.nextInt();
+				scanner.nextLine();
+			    destinos.add(new DestinoTuristico(codigoDestino, nombre, precio, pais, cantidadDias));
+			}else {
+				System.out.println("El país con el código ingresado no existe.");
+			}
+		} catch (InputMismatchException e) {
+	        System.out.println("Error: Entrada inválida. Por favor, ingrese datos válidos.");
+	    } catch (Exception e) {
+	        System.out.println("Error inesperado: " + e.getMessage());
+	    }
 	}
 	
 	private static void mostrarDestino() {
@@ -197,7 +205,33 @@ public class Main {
 	
 	public static void mostrarPais() {
 				System.out.println("---- Lista Paises ----");
-						paises.forEach(p->System.out.println(p));
-	  
+						paises.forEach(p->System.out.println(p)); 
 	}
+	
+	public static void mostrarDestinoPais() {
+		 try {
+		        System.out.println("Ingrese el código del país:");
+		        String codigoPais = scanner.nextLine();
+		        
+		        Pais pais = buscarPaisPorCodigo(codigoPais);
+		        if (pais != null) {
+		            System.out.println("Destinos turísticos en " + pais.getNombre() + " ----- ");
+		            boolean encontrado = false;
+		            for (DestinoTuristico destino : destinos) {
+		                if (destino.getPais().getCodigo().equals(codigoPais)) {
+		                    System.out.println(destino);
+		                    encontrado = true;
+		                }
+		            }
+		            if (!encontrado) {
+		                System.out.println("No hay destinos turísticos para mostrar en este país.");
+		            }
+		        } else {
+		            System.out.println("El país con el código ingresado no existe.");
+		        }
+		    } catch (Exception e) {
+		        System.out.println("Error inesperado: " + e.getMessage());
+		    }
+	}
+	
 }
